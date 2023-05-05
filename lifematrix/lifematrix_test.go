@@ -40,7 +40,7 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
 			if test_grid.cells[i][j] != 0 && test_grid.cells[i][j] != 1 {
-				t.Error("expected 0 or 1, but got %d", test_grid.cells[i][j])
+				t.Error("expected 0 or 1, but got ", test_grid.cells[i][j])
 			}
 		}
 	}

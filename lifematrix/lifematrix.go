@@ -1,6 +1,9 @@
 package lifematrix
 
-import "errors"
+import (
+	"errors"
+	"math/rand"
+)
 
 type Grid struct {
 	rows  int
@@ -21,4 +24,12 @@ func NewGrid(rows, cols int) (*Grid, error) {
 		newLifeMatix.cells[row] = make([]int, cols)
 	}
 	return newLifeMatix, nil
+}
+
+func (g *Grid) Randomize() {
+	for i := 0; i < g.rows; i++ {
+		for j := 0; j < g.cols; j++ {
+			g.cells[i][j] = rand.Intn(2)
+		}
+	}
 }
