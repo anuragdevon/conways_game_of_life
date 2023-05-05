@@ -8,3 +8,11 @@ Problem Statement: Conways game of life
          - cell[i][j] >= 2 => continues to live on next state
          - cell[i][j] == 3 => dead cell comes to life
          - cell[i][j] > 3 => dies - overpopulation
+
+
+testgridcheck:
+[1 1 0]
+[0 0 1]
+[1 0 0]
+1 - alive
+0 - dead
