@@ -10,11 +10,10 @@ import (
 func TestNewMockLife(t *testing.T) {
 	rows := 10
 	cols := 10
-	testGrid, err1 := lifematrix.NewGrid(rows, cols)
-	assert.Nil(t, err1)
+	testGrid, err := lifematrix.NewGrid(rows, cols)
+	assert.Nil(t, err)
 
-	newMockLife, err2 := MockLife(testGrid)
-	assert.Nil(t, err1)
+	newMockLife := CreateMockLife(testGrid)
 	if newMockLife.grid != testGrid {
 		t.Errorf("expected both grids to be same")
 	}
