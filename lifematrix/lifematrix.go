@@ -8,7 +8,7 @@ import (
 type Grid struct {
 	rows  int
 	cols  int
-	cells [][]int
+	Cells [][]int
 }
 
 func NewGrid(rows, cols int) (*Grid, error) {
@@ -18,18 +18,18 @@ func NewGrid(rows, cols int) (*Grid, error) {
 	newLifeMatix := &Grid{
 		rows:  rows,
 		cols:  cols,
-		cells: make([][]int, rows),
+		Cells: make([][]int, rows),
 	}
-	for row := range newLifeMatix.cells {
-		newLifeMatix.cells[row] = make([]int, cols)
+	for row := range newLifeMatix.Cells {
+		newLifeMatix.Cells[row] = make([]int, cols)
 	}
 	return newLifeMatix, nil
 }
 
-func (g *Grid) Randomize() {
-	for i := 0; i < g.rows; i++ {
-		for j := 0; j < g.cols; j++ {
-			g.cells[i][j] = rand.Intn(2)
+func (life *Grid) Randomize() {
+	for i := 0; i < life.rows; i++ {
+		for j := 0; j < life.cols; j++ {
+			life.Cells[i][j] = rand.Intn(2)
 		}
 	}
 }

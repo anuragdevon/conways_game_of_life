@@ -19,3 +19,10 @@ func TestNewMockLife(t *testing.T) {
 	}
 
 }
+
+func TestCountLiveNeighborsInMiddle(t *testing.T) {
+	rows := 3
+	cols := 3
+	testGrid, err := lifematrix.NewGrid(rows, cols)
+	assert.Nil(t, err)
+}
