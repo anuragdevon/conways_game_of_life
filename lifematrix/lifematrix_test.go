@@ -104,3 +104,29 @@ func TestSetAliveCellForInvalidAliveValue(t *testing.T) {
 
 	assert.Equal(t, earlier_value, test_grid.Cells[1][1])
 }
+
+func TestValidNumberOfLiveNeighbors(t *testing.T) {
+	rows := 3
+	cols := 3
+	testGrid, err := NewGrid(rows, cols)
+	assert.Nil(t, err)
+
+	testGrid.SetCellAlive(0, 0, 1)
+	testGrid.SetCellAlive(0, 1, 1)
+	testGrid.SetCellAlive(0, 2, 1)
+
+	testGrid.SetCellAlive(1, 0, 0)
+	testGrid.SetCellAlive(1, 1, 0)
+	testGrid.SetCellAlive(1, 2, 0)
+
+	testGrid.SetCellAlive(2, 0, 1)
+	testGrid.SetCellAlive(2, 1, 1)
+	testGrid.SetCellAlive(0, 0, 1)
+
+	expected_live_neighbors_for_cell_1_1 := 6
+	actual_live_neighbors_for_cell_1_1 := testGrid.NumberOfLiveNeighbors(1, 1)
+
+	if actual_live_neighbors_for_cell_1_1 != expected_live_neighbors_for_cell_1_1 {
+		t.Errorf("Expected %d neighbors but got %d", actual_live_neighbors_for_cell_1_1, expected_live_neighbors_for_cell_1_1)
+	}
+}
