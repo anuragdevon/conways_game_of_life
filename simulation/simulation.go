@@ -1,4 +1,4 @@
-package mocklife
+package simulation
 
 import (
 	"conwaysgameoflife/lifematrix"
