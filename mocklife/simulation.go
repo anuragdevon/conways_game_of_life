@@ -13,3 +13,7 @@ func NewSimulation(matrix *lifematrix.Grid) *Simulation {
 		grid: matrix,
 	}
 }
+
+func (s *Simulation) NextStateOfSimulation() {
+
+}
