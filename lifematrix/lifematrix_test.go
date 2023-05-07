@@ -60,7 +60,7 @@ func TestAliveCellForSetCellAliveToTrue(t *testing.T) {
 	assert.Nil(t, err)
 	test_grid.Randomize()
 
-	test_grid.setAliveCell(1, 1)
+	test_grid.setCellAlive(1, 1)
 
 	assert.Equal(t, 1, test_grid.Cells[1][1])
 }

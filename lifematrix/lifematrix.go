@@ -26,10 +26,14 @@ func NewGrid(rows, cols int) (*Grid, error) {
 	return newLifeMatix, nil
 }
 
-func (life *Grid) Randomize() {
-	for i := 0; i < life.rows; i++ {
-		for j := 0; j < life.cols; j++ {
-			life.Cells[i][j] = rand.Intn(2)
+func (grid *Grid) Randomize() {
+	for i := 0; i < grid.rows; i++ {
+		for j := 0; j < grid.cols; j++ {
+			grid.Cells[i][j] = rand.Intn(2)
 		}
 	}
+}
+
+func (grid *Grid) setCellAlive(x, y int) {
+	grid.Cells[x][y] = 1
 }
