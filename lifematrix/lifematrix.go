@@ -34,8 +34,8 @@ func (grid *Grid) Randomize() {
 	}
 }
 
-func (grid *Grid) setCellAlive(x, y int) {
+func (grid *Grid) SetCellAlive(x, y, alive int) {
 	if x < grid.rows && y < grid.cols && x >= 0 && y >= 0 {
-		grid.Cells[x][y] = 1
+		grid.Cells[x][y] = alive
 	}
 }
