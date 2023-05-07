@@ -8,8 +8,8 @@ type Simulation struct {
 	grid *lifematrix.Grid
 }
 
-func NewSimulation(life *lifematrix.Grid) *Simulation {
+func NewSimulation(matrix *lifematrix.Grid) *Simulation {
 	return &Simulation{
-		grid: life,
+		grid: matrix,
 	}
 }
