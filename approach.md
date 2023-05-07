@@ -18,4 +18,4 @@ testgridcheck:
 0 - dead
 
 
-matrix size2 testcase
+matrix size2 testcase imporant => randomize check will fail
