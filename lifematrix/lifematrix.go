@@ -35,7 +35,7 @@ func (grid *Grid) Randomize() {
 }
 
 func (grid *Grid) SetCellAlive(x, y, alive int) {
-	if x < grid.rows && y < grid.cols && x >= 0 && y >= 0 {
+	if x < grid.rows && y < grid.cols && x >= 0 && y >= 0 && (alive == 0 || alive == 1) {
 		grid.Cells[x][y] = alive
 	}
 }
