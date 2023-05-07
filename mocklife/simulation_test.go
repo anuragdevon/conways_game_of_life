@@ -18,3 +18,7 @@ func TestCreateValidNewSimulation(t *testing.T) {
 		t.Errorf("expected both grids to be same")
 	}
 }
+
+func (g *)SetCell(x, y int, alive bool) {
+
+}

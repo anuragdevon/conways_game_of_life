@@ -52,3 +52,15 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 		t.Errorf("Expected a random allocation of dead and live cells")
 	}
 }
+
+func TestAliveCellForSetCellAliveToTrue(t *testing.T) {
+	rows := 3
+	cols := 3
+	test_grid, err := NewGrid(rows, cols)
+	assert.Nil(t, err)
+	test_grid.Randomize()
+
+	test_grid.setAliveCell(1, 1)
+
+	assert.Equal(t, 1, test_grid.Cells[1][1])
+}
