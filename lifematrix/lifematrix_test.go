@@ -64,3 +64,18 @@ func TestAliveCellForSetCellAliveToTrue(t *testing.T) {
 
 	assert.Equal(t, 1, test_grid.Cells[1][1])
 }
+
+func TestAliveCellForInvalidCellInSetCellAlive(t *testing.T) {
+	rows := 3
+	cols := 3
+	test_grid, err := NewGrid(rows, cols)
+	assert.Nil(t, err)
+
+	test_grid.Randomize()
+
+	earlier_value := test_grid.Cells[1][1]
+	test_grid.setCellAlive(3, 2)
+
+	assert.Equal(t, earlier_value, test_grid.Cells[1][1])
+
+}

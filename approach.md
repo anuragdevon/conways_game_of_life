@@ -16,3 +16,6 @@ testgridcheck:
 [1 0 0]
 1 - alive
 0 - dead
+
+
+matrix size2 testcase
