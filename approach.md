@@ -11,9 +11,9 @@ Problem Statement: Conways game of life
 
 
 testgridcheck:
-[1 1 0]
-[0 0 1]
-[1 0 0]
+[1 1 1]
+[0 1 0]
+[1 1 1]
 1 - alive
 0 - dead
 

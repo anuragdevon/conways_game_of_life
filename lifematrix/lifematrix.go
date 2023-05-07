@@ -39,3 +39,15 @@ func (grid *Grid) SetCellAlive(x, y, alive int) {
 		grid.Cells[x][y] = alive
 	}
 }
+
+func (grid *Grid) NumberOfLiveNeighbors(row, col int) int {
+	count := 0
+	for i := row - 1; i <= row+1; i++ {
+		for j := col - 1; j <= col+1; j++ {
+			if i >= 0 && i < grid.rows && j >= 0 && j < grid.cols && grid.Cells[i][j] == 1 {
+				count += 1
+			}
+		}
+	}
+	return count
+}
