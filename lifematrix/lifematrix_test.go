@@ -35,13 +35,20 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	cols := 10
 	test_grid, err := NewGrid(rows, cols)
 	assert.Nil(t, err)
-
+	count_number_of_ones, count_number_of_zeros := 0, 0
 	test_grid.Randomize()
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
-			if test_grid.Cells[i][j] != 0 && test_grid.Cells[i][j] != 1 {
+			if test_grid.Cells[i][j] == 0 {
+				count_number_of_zeros += 1
+			} else if test_grid.Cells[i][j] == 1 {
+				count_number_of_ones += 1
+			} else {
 				t.Error("expected 0 or 1, but got ", test_grid.Cells[i][j])
 			}
 		}
+	}
+	if count_number_of_ones == 0 || count_number_of_zeros == 0 {
+		t.Errorf("Expected a random allocation of dead and live cells")
 	}
 }

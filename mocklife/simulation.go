@@ -4,12 +4,12 @@ import (
 	"conwaysgameoflife/lifematrix"
 )
 
-type MockLife struct {
+type Simulation struct {
 	grid *lifematrix.Grid
 }
 
-func CreateMockLife(life *lifematrix.Grid) *MockLife {
-	return &MockLife{
+func NewSimulation(life *lifematrix.Grid) *Simulation {
+	return &Simulation{
 		grid: life,
 	}
 }
