@@ -2,6 +2,7 @@ package simulation
 
 import (
 	"conwaysgameoflife/lifematrix"
+	"fmt"
 )
 
 type Simulation struct {
@@ -26,4 +27,18 @@ func (s *Simulation) NextStateOfSimulation() {
 		}
 	}
 	s.grid = next
+}
+
+func (s *Simulation) DisplaySimulationGrid() {
+	for i := range s.grid.Cells {
+		for j := range s.grid.Cells[i] {
+			if s.grid.Cells[i][j] == 0 {
+				fmt.Print("*")
+			} else {
+				fmt.Print("-")
+			}
+		}
+		fmt.Println()
+	}
+	fmt.Println()
 }
