@@ -3,6 +3,7 @@ package simulation
 import (
 	"conwaysgameoflife/lifematrix"
 	"fmt"
+	"time"
 )
 
 type Simulation struct {
@@ -15,7 +16,7 @@ func NewSimulation(matrix *lifematrix.Grid) *Simulation {
 	}
 }
 
-func (s *Simulation) NextStateOfSimulation() {
+func (s *Simulation) nextStateOfSimulation() {
 	next, _ := lifematrix.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
 	for i := range s.grid.Cells {
 		for j := range s.grid.Cells[i] {
@@ -29,7 +30,13 @@ func (s *Simulation) NextStateOfSimulation() {
 	s.grid = next
 }
 
-func (s *Simulation) DisplaySimulationGrid() {
+func (s *Simulation) UpdateGameOfLife() {
+	s.displaySimulationGrid()
+	time.Sleep(1 * time.Second)
+	s.nextStateOfSimulation()
+}
+
+func (s *Simulation) displaySimulationGrid() {
 	for i := range s.grid.Cells {
 		for j := range s.grid.Cells[i] {
 			if s.grid.Cells[i][j] == 0 {

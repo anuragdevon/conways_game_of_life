@@ -4,12 +4,11 @@ import (
 	"conwaysgameoflife/lifematrix"
 	"conwaysgameoflife/simulation"
 	"fmt"
-	"time"
 )
 
 func main() {
-	rows := 3
-	cols := 3
+	rows := 1
+	cols := 1
 
 	grid, err := lifematrix.NewGrid(rows, cols)
 	if err != nil {
@@ -20,10 +19,8 @@ func main() {
 
 	new_simulation := simulation.NewSimulation(grid)
 
-	for i := 0; i < 10; i++ {
-		fmt.Println("New Iteration")
-		new_simulation.DisplaySimulationGrid()
-		time.Sleep(1 * time.Second)
-		new_simulation.NextStateOfSimulation()
+	for i := 0; ; i++ {
+		fmt.Printf("Life Cycle %d", i+1)
+		new_simulation.UpdateGameOfLife()
 	}
 }

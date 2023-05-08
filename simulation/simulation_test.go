@@ -46,7 +46,7 @@ func TestNextStateOfSimulation(t *testing.T) {
 		{0, 1, 0},
 	}
 
-	testNewSimulation.NextStateOfSimulation()
+	testNewSimulation.nextStateOfSimulation()
 	if !reflect.DeepEqual(testNewSimulation.grid.Cells, expectedNextStateGrid) {
 		t.Errorf("expected state did not match with evaluated state")
 	}
