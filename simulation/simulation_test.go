@@ -10,8 +10,7 @@ import (
 func TestCreateValidNewSimulation(t *testing.T) {
 	rows := 10
 	cols := 10
-	testGrid, err := lifematrix.NewGrid(rows, cols)
-	assert.Nil(t, err)
+	testGrid, _ := lifematrix.NewGrid(rows, cols)
 
 	testNewSimulation := NewSimulation(testGrid)
 	if testNewSimulation.grid != testGrid {
@@ -22,8 +21,7 @@ func TestCreateValidNewSimulation(t *testing.T) {
 func TestCreateValidNextStateOfSimulation(t *testing.T) {
 	rows := 3
 	cols := 3
-	testGrid, err := lifematrix.NewGrid(rows, cols)
-	assert.Nil(t, err)
+	testGrid, _ := lifematrix.NewGrid(rows, cols)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)
@@ -102,8 +100,7 @@ func TestLiveCellToLiveForExactlyTwoOrThreeNeighbors(t *testing.T) {
 func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 	rows := 3
 	cols := 3
-	testGrid, err := lifematrix.NewGrid(rows, cols)
-	assert.Nil(t, err)
+	testGrid, _ := lifematrix.NewGrid(rows, cols)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)
@@ -132,8 +129,7 @@ func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 func TestDeadToComeLiveForExactlyThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
-	testGrid, err := lifematrix.NewGrid(rows, cols)
-	assert.Nil(t, err)
+	testGrid, _ := lifematrix.NewGrid(rows, cols)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)

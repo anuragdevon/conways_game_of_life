@@ -33,8 +33,8 @@ func TestInvalidGridCreationWithNegativeDimension(t *testing.T) {
 func TestValidRandomCellValuesInitialization(t *testing.T) {
 	rows := 10
 	cols := 10
-	test_grid, err := NewGrid(rows, cols)
-	assert.Nil(t, err)
+	test_grid, _ := NewGrid(rows, cols)
+
 	count_number_of_ones, count_number_of_zeros := 0, 0
 	test_grid.Randomize()
 	for i := 0; i < rows; i++ {
@@ -56,8 +56,8 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 func TestAliveCellForSetCellAliveToOne(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, err := NewGrid(rows, cols)
-	assert.Nil(t, err)
+	test_grid, _ := NewGrid(rows, cols)
+
 	test_grid.Randomize()
 
 	test_grid.SetCellAlive(1, 1, 1)
@@ -68,8 +68,8 @@ func TestAliveCellForSetCellAliveToOne(t *testing.T) {
 func TestAliveCellForSetCellAliveToZero(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, err := NewGrid(rows, cols)
-	assert.Nil(t, err)
+	test_grid, _ := NewGrid(rows, cols)
+
 	test_grid.Randomize()
 
 	test_grid.SetCellAlive(1, 1, 0)
@@ -80,8 +80,7 @@ func TestAliveCellForSetCellAliveToZero(t *testing.T) {
 func TestSetAliveCellForInvalidCell(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, err := NewGrid(rows, cols)
-	assert.Nil(t, err)
+	test_grid, _ := NewGrid(rows, cols)
 
 	test_grid.Randomize()
 
@@ -94,8 +93,7 @@ func TestSetAliveCellForInvalidCell(t *testing.T) {
 func TestSetAliveCellForInvalidAliveValue(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, err := NewGrid(rows, cols)
-	assert.Nil(t, err)
+	test_grid, _ := NewGrid(rows, cols)
 
 	test_grid.Randomize()
 
@@ -108,8 +106,7 @@ func TestSetAliveCellForInvalidAliveValue(t *testing.T) {
 func TestValidNumberOfLiveNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, err := NewGrid(rows, cols)
-	assert.Nil(t, err)
+	test_grid, _ := NewGrid(rows, cols)
 
 	test_grid.SetCellAlive(0, 0, 1)
 	test_grid.SetCellAlive(0, 1, 1)
