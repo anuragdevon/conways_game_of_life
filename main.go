@@ -7,8 +7,11 @@ import (
 )
 
 func main() {
-	rows := 3
-	cols := 3
+	var rows, cols int
+	fmt.Printf("Enter number of rows: ")
+	fmt.Scanln(&rows)
+	fmt.Println("Enter number of cols: ")
+	fmt.Scanln(&cols)
 
 	grid, err := lifematrix.NewGrid(rows, cols)
 	if err != nil {

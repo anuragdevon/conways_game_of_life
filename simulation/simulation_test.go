@@ -51,3 +51,26 @@ func TestCreateValidNextStateOfSimulation(t *testing.T) {
 		t.Errorf("expected state did not match with evaluated state")
 	}
 }
+
+func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
+	testGrid, _ := lifematrix.NewGrid(3, 3)
+
+	testGrid.SetCellAlive(0, 0, 1)
+	testGrid.SetCellAlive(0, 1, 0)
+	testGrid.SetCellAlive(0, 2, 0)
+	testGrid.SetCellAlive(1, 0, 0)
+	testGrid.SetCellAlive(1, 1, 1)
+	testGrid.SetCellAlive(1, 2, 0)
+	testGrid.SetCellAlive(2, 0, 0)
+	testGrid.SetCellAlive(2, 1, 0)
+	testGrid.SetCellAlive(2, 2, 0)
+
+	expectedNextStateGrid := [][]int{
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0},
+	}
+	testSimulation := NewSimulation(testGrid)
+	testSimulation.nextStateOfSimulation()
+	assert.Equal(t, expectedNextStateGrid, testSimulation.grid.Cells)
+}
