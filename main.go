@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	rows := 1
-	cols := 1
+	rows := 3
+	cols := 3
 
 	grid, err := lifematrix.NewGrid(rows, cols)
 	if err != nil {
@@ -20,7 +20,7 @@ func main() {
 	new_simulation := simulation.NewSimulation(grid)
 
 	for i := 0; ; i++ {
-		fmt.Printf("Life Cycle %d", i+1)
+		fmt.Printf("Life Cycle %d\n", i+1)
 		new_simulation.UpdateGameOfLife()
 	}
 }

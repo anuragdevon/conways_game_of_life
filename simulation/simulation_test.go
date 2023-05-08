@@ -30,20 +30,20 @@ func TestCreateValidNextStateOfSimulation(t *testing.T) {
 	testGrid.SetCellAlive(0, 1, 1)
 	testGrid.SetCellAlive(0, 2, 0)
 
-	testGrid.SetCellAlive(1, 0, 1)
-	testGrid.SetCellAlive(1, 1, 1)
+	testGrid.SetCellAlive(1, 0, 0)
+	testGrid.SetCellAlive(1, 1, 0)
 	testGrid.SetCellAlive(1, 2, 1)
 
-	testGrid.SetCellAlive(2, 0, 0)
+	testGrid.SetCellAlive(2, 0, 1)
 	testGrid.SetCellAlive(2, 1, 1)
-	testGrid.SetCellAlive(0, 0, 0)
+	testGrid.SetCellAlive(2, 2, 1)
 
 	testNewSimulation := NewSimulation(testGrid)
 
 	expectedNextStateGrid := [][]int{
-		{0, 1, 0},
+		{0, 0, 0},
 		{1, 0, 1},
-		{0, 1, 0},
+		{0, 1, 1},
 	}
 
 	testNewSimulation.nextStateOfSimulation()
