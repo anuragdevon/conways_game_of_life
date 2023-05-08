@@ -10,3 +10,11 @@ const (
 type Cell struct {
 	status AliveStatus
 }
+
+func NewAliveCell() *Cell {
+	return &Cell{status: Alive}
+}
+
+func NewDeadCell() *Cell {
+	return &Cell{status: Dead}
+}
