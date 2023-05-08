@@ -1,6 +1,7 @@
 package simulation
 
 import (
+	"conwaysgameoflife/cell"
 	"conwaysgameoflife/grid"
 	"fmt"
 	"time"
@@ -20,13 +21,14 @@ func (s *Simulation) nextStateOfSimulation() {
 	next, _ := grid.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
 	for i := range s.grid.Cells {
 		for j := range s.grid.Cells[i] {
-			next.Cells[i][j] = 0
+			nextCell := cell.NewDeadCell()
 			liveNeighbors := s.grid.NumberOfLiveNeighbors(i, j)
-			if (s.grid.Cells[i][j] == 1 && (liveNeighbors == 2 || liveNeighbors == 3)) || (s.grid.Cells[i][j] == 0 && liveNeighbors == 3) {
-				next.Cells[i][j] = 1
-			} else if s.grid.Cells[i][j] == 1 && liveNeighbors > 3 {
-				next.Cells[i][j] = 0
+			if s.grid.Cells[i][j].IsAlive() && (liveNeighbors == 2 || liveNeighbors == 3) {
+				nextCell = cell.NewAliveCell()
+			} else if !s.grid.Cells[i][j].IsAlive() && liveNeighbors == 3 {
+				nextCell = cell.NewAliveCell()
 			}
+			next.Cells[i][j] = nextCell
 		}
 	}
 	s.grid = next
@@ -35,7 +37,7 @@ func (s *Simulation) nextStateOfSimulation() {
 func (s *Simulation) displaySimulationGrid() {
 	for i := range s.grid.Cells {
 		for j := range s.grid.Cells[i] {
-			if s.grid.Cells[i][j] == 0 {
+			if s.grid.Cells[i][j].IsAlive() {
 				fmt.Print("*")
 			} else {
 				fmt.Print("-")
