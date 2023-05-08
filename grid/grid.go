@@ -1,7 +1,7 @@
 package grid
 
 import (
-	cell "conwaysgameoflife/cells"
+	"conwaysgameoflife/cell"
 	"errors"
 	"math/rand"
 )
