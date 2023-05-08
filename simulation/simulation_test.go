@@ -126,7 +126,7 @@ func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 	assert.Equal(t, expectedNextStateGrid, testSimulation.grid.Cells)
 }
 
-func TestDeadToComeLiveForExactlyThreeNeighbors(t *testing.T) {
+func TestDeadToComeAliveForExactlyThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
 	testGrid, _ := lifematrix.NewGrid(rows, cols)

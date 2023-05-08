@@ -65,7 +65,7 @@ func TestAliveCellForSetCellAliveToOne(t *testing.T) {
 	assert.Equal(t, 1, test_grid.Cells[1][1])
 }
 
-func TestAliveCellForSetCellAliveToZero(t *testing.T) {
+func TestDeadCellForSetCellAliveToZero(t *testing.T) {
 	rows := 3
 	cols := 3
 	test_grid, _ := NewGrid(rows, cols)
@@ -77,7 +77,7 @@ func TestAliveCellForSetCellAliveToZero(t *testing.T) {
 	assert.Equal(t, 0, test_grid.Cells[1][1])
 }
 
-func TestSetAliveCellForInvalidCell(t *testing.T) {
+func TestNoChangeInCellValueForSetAliveCellForInvalidCell(t *testing.T) {
 	rows := 3
 	cols := 3
 	test_grid, _ := NewGrid(rows, cols)
@@ -90,7 +90,7 @@ func TestSetAliveCellForInvalidCell(t *testing.T) {
 	assert.Equal(t, earlier_value, test_grid.Cells[1][1])
 }
 
-func TestSetAliveCellForInvalidAliveValue(t *testing.T) {
+func TestNoChangeInCellValueForInvalidAliveValue(t *testing.T) {
 	rows := 3
 	cols := 3
 	test_grid, _ := NewGrid(rows, cols)
