@@ -18,3 +18,7 @@ func NewAliveCell() *Cell {
 func NewDeadCell() *Cell {
 	return &Cell{status: Dead}
 }
+
+func (c *Cell) IsAlive() bool {
+	return c.status == Alive
+}

@@ -1,6 +1,7 @@
 package grid
 
 import (
+	cell "conwaysgameoflife/cells"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -39,12 +40,10 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	test_grid.Randomize()
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
-			if test_grid.Cells[i][j] == 0 {
-				count_number_of_zeros += 1
-			} else if test_grid.Cells[i][j] == 1 {
+			if test_grid.Cells[i][j].IsAlive() {
 				count_number_of_ones += 1
 			} else {
-				t.Error("expected 0 or 1, but got ", test_grid.Cells[i][j])
+				count_number_of_zeros += 1
 			}
 		}
 	}
@@ -53,72 +52,22 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	}
 }
 
-func TestAliveCellForSetCellAliveToOne(t *testing.T) {
-	rows := 3
-	cols := 3
-	test_grid, _ := NewGrid(rows, cols)
-
-	test_grid.Randomize()
-
-	test_grid.SetCellAlive(1, 1, 1)
-
-	assert.Equal(t, 1, test_grid.Cells[1][1])
-}
-
-func TestDeadCellForSetCellAliveToZero(t *testing.T) {
-	rows := 3
-	cols := 3
-	test_grid, _ := NewGrid(rows, cols)
-
-	test_grid.Randomize()
-
-	test_grid.SetCellAlive(1, 1, 0)
-
-	assert.Equal(t, 0, test_grid.Cells[1][1])
-}
-
-func TestNoChangeInCellValueForSetAliveCellForInvalidCell(t *testing.T) {
-	rows := 3
-	cols := 3
-	test_grid, _ := NewGrid(rows, cols)
-
-	test_grid.Randomize()
-
-	earlier_value := test_grid.Cells[1][1]
-	test_grid.SetCellAlive(3, 2, 1)
-
-	assert.Equal(t, earlier_value, test_grid.Cells[1][1])
-}
-
-func TestNoChangeInCellValueForInvalidAliveValue(t *testing.T) {
-	rows := 3
-	cols := 3
-	test_grid, _ := NewGrid(rows, cols)
-
-	test_grid.Randomize()
-
-	earlier_value := test_grid.Cells[1][1]
-	test_grid.SetCellAlive(1, 1, 3)
-
-	assert.Equal(t, earlier_value, test_grid.Cells[1][1])
-}
-
 func TestValidNumberOfLiveNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
 	test_grid, _ := NewGrid(rows, cols)
 
-	test_grid.SetCellAlive(0, 0, 1)
-	test_grid.SetCellAlive(0, 1, 1)
-	test_grid.SetCellAlive(0, 2, 1)
+	test_grid.Cells[0][0] = cell.NewAliveCell()
+	test_grid.Cells[0][1] = cell.NewAliveCell()
+	test_grid.Cells[0][2] = cell.NewAliveCell()
 
-	test_grid.SetCellAlive(1, 0, 0)
-	test_grid.SetCellAlive(1, 1, 1)
-	test_grid.SetCellAlive(1, 2, 0)
+	test_grid.Cells[1][0] = cell.NewDeadCell()
+	test_grid.Cells[1][1] = cell.NewAliveCell()
+	test_grid.Cells[1][2] = cell.NewDeadCell()
 
-	test_grid.SetCellAlive(2, 0, 1)
-	test_grid.SetCellAlive(2, 1, 1)
-	test_grid.SetCellAlive(2, 2, 1)
+	test_grid.Cells[2][0] = cell.NewAliveCell()
+	test_grid.Cells[2][1] = cell.NewAliveCell()
+	test_grid.Cells[2][2] = cell.NewAliveCell()
 
 	expected_live_neighbors_for_cell_1_1 := 6
 	actual_live_neighbors_for_cell_1_1 := test_grid.NumberOfLiveNeighbors(1, 1)
