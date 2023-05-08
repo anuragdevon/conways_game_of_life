@@ -24,6 +24,8 @@ func (s *Simulation) nextStateOfSimulation() {
 			liveNeighbors := s.grid.NumberOfLiveNeighbors(i, j)
 			if (s.grid.Cells[i][j] == 1 && (liveNeighbors == 2 || liveNeighbors == 3)) || (s.grid.Cells[i][j] == 0 && liveNeighbors == 3) {
 				next.Cells[i][j] = 1
+			} else if s.grid.Cells[i][j] == 1 {
+				next.Cells[i][j] = 0
 			}
 		}
 	}

@@ -74,3 +74,4 @@ func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
 	testSimulation.nextStateOfSimulation()
 	assert.Equal(t, expectedNextStateGrid, testSimulation.grid.Cells)
 }
+
