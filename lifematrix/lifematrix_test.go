@@ -121,7 +121,7 @@ func TestValidNumberOfLiveNeighbors(t *testing.T) {
 
 	test_grid.SetCellAlive(2, 0, 1)
 	test_grid.SetCellAlive(2, 1, 1)
-	test_grid.SetCellAlive(0, 0, 1)
+	test_grid.SetCellAlive(2, 2, 1)
 
 	expected_live_neighbors_for_cell_1_1 := 6
 	actual_live_neighbors_for_cell_1_1 := test_grid.NumberOfLiveNeighbors(1, 1)

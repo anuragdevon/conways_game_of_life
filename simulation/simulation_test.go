@@ -20,7 +20,7 @@ func TestCreateValidNewSimulation(t *testing.T) {
 	}
 }
 
-func TestNextStateOfSimulation(t *testing.T) {
+func TestCreateValidNextStateOfSimulation(t *testing.T) {
 	rows := 3
 	cols := 3
 	testGrid, err := lifematrix.NewGrid(rows, cols)
