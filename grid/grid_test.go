@@ -1,4 +1,4 @@
-package lifematrix
+package grid
 
 import (
 	"testing"

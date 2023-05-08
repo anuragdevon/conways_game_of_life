@@ -1,7 +1,7 @@
 package main
 
 import (
-	"conwaysgameoflife/lifematrix"
+	"conwaysgameoflife/grid"
 	"conwaysgameoflife/simulation"
 	"fmt"
 )
@@ -13,14 +13,14 @@ func main() {
 	fmt.Println("Enter number of cols: ")
 	fmt.Scanln(&cols)
 
-	grid, err := lifematrix.NewGrid(rows, cols)
+	matrix, err := grid.NewGrid(rows, cols)
 	if err != nil {
 		panic(err)
 	}
 
-	grid.Randomize()
+	matrix.Randomize()
 
-	new_simulation := simulation.NewSimulation(grid)
+	new_simulation := simulation.NewSimulation(matrix)
 
 	for i := 0; ; i++ {
 		fmt.Printf("Life Cycle %d\n", i+1)

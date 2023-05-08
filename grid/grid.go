@@ -1,10 +1,13 @@
-package lifematrix
+package grid
 
 import (
 	"errors"
 	"math/rand"
 )
 
+// Associate behavior with data => keep a data behavior entity
+// Avoid using common nouns as => as entities
+// Mock and spy
 type Grid struct {
 	rows  int
 	cols  int

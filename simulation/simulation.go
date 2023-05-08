@@ -1,23 +1,23 @@
 package simulation
 
 import (
-	"conwaysgameoflife/lifematrix"
+	"conwaysgameoflife/grid"
 	"fmt"
 	"time"
 )
 
 type Simulation struct {
-	grid *lifematrix.Grid
+	grid *grid.Grid
 }
 
-func NewSimulation(matrix *lifematrix.Grid) *Simulation {
+func NewSimulation(matrix *grid.Grid) *Simulation {
 	return &Simulation{
 		grid: matrix,
 	}
 }
 
 func (s *Simulation) nextStateOfSimulation() {
-	next, _ := lifematrix.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
+	next, _ := grid.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
 	for i := range s.grid.Cells {
 		for j := range s.grid.Cells[i] {
 			next.Cells[i][j] = 0

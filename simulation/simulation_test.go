@@ -1,7 +1,7 @@
 package simulation
 
 import (
-	"conwaysgameoflife/lifematrix"
+	"conwaysgameoflife/grid"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,7 +10,7 @@ import (
 func TestCreateValidNewSimulation(t *testing.T) {
 	rows := 10
 	cols := 10
-	testGrid, _ := lifematrix.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
 	testNewSimulation := NewSimulation(testGrid)
 	if testNewSimulation.grid != testGrid {
@@ -21,7 +21,7 @@ func TestCreateValidNewSimulation(t *testing.T) {
 func TestCreateValidNextStateOfSimulation(t *testing.T) {
 	rows := 3
 	cols := 3
-	testGrid, _ := lifematrix.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)
@@ -48,7 +48,7 @@ func TestCreateValidNextStateOfSimulation(t *testing.T) {
 }
 
 func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
-	testGrid, _ := lifematrix.NewGrid(3, 3)
+	testGrid, _ := grid.NewGrid(3, 3)
 
 	testGrid.SetCellAlive(0, 0, 1)
 	testGrid.SetCellAlive(0, 1, 0)
@@ -73,7 +73,7 @@ func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
 }
 
 func TestLiveCellToLiveForExactlyTwoOrThreeNeighbors(t *testing.T) {
-	testGrid, _ := lifematrix.NewGrid(3, 3)
+	testGrid, _ := grid.NewGrid(3, 3)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)
@@ -100,7 +100,7 @@ func TestLiveCellToLiveForExactlyTwoOrThreeNeighbors(t *testing.T) {
 func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 	rows := 3
 	cols := 3
-	testGrid, _ := lifematrix.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)
@@ -129,7 +129,7 @@ func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 func TestDeadToComeAliveForExactlyThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
-	testGrid, _ := lifematrix.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
 	testGrid.SetCellAlive(0, 0, 0)
 	testGrid.SetCellAlive(0, 1, 1)
