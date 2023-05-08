@@ -5,9 +5,6 @@ import (
 	"math/rand"
 )
 
-// Associate behavior with data => keep a data behavior entity
-// Avoid using common nouns as => as entities
-// Mock and spy
 type Grid struct {
 	rows  int
 	cols  int
@@ -37,9 +34,9 @@ func (grid *Grid) Randomize() {
 	}
 }
 
-func (grid *Grid) SetCellAlive(x, y, alive int) {
-	if x < grid.rows && y < grid.cols && x >= 0 && y >= 0 && (alive == 0 || alive == 1) {
-		grid.Cells[x][y] = alive
+func (grid *Grid) SetCellAlive(row, col, alive int) {
+	if row < grid.rows && col < grid.cols && row >= 0 && col >= 0 && (alive == 0 || alive == 1) {
+		grid.Cells[row][col] = alive
 	}
 }
 
