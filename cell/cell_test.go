@@ -28,7 +28,7 @@ func TestIsAliveCheckForNewCell(t *testing.T) {
 func TestValidNumberOfLiveNeighbors(t *testing.T) {
 	mainCell := NewAliveCell()
 
-	mainCell.neighbors = []*Cell{
+	mainCell.Neighbors = []*Cell{
 		NewAliveCell(),
 		NewDeadCell(),
 		NewAliveCell(),

@@ -12,26 +12,29 @@ type Simulation struct {
 }
 
 func NewSimulation(matrix *grid.Grid) *Simulation {
+	matrix.SetCellNeighbors()
 	return &Simulation{
 		grid: matrix,
 	}
+
 }
 
 func (s *Simulation) nextStateOfSimulation() {
-	next, _ := grid.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
+	nextSimGrid, _ := grid.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
 	for i := range s.grid.Cells {
 		for j := range s.grid.Cells[i] {
 			nextCell := cell.NewDeadCell()
-			liveNeighbors := s.grid.NumberOfLiveNeighbors(i, j)
+			liveNeighbors := s.grid.Cells[i][j].NumberOfLiveNeighbors()
 			if s.grid.Cells[i][j].IsAlive() && (liveNeighbors == 2 || liveNeighbors == 3) {
 				nextCell = cell.NewAliveCell()
 			} else if !s.grid.Cells[i][j].IsAlive() && liveNeighbors == 3 {
 				nextCell = cell.NewAliveCell()
 			}
-			next.Cells[i][j] = nextCell
+			nextSimGrid.Cells[i][j] = nextCell
 		}
 	}
-	s.grid = next
+	nextSimGrid.SetCellNeighbors()
+	s.grid = nextSimGrid
 }
 
 func (s *Simulation) displaySimulationGrid() {
