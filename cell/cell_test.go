@@ -2,20 +2,18 @@ package cell
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestValidNewAliveCellGeneration(t *testing.T) {
 	new_cell := NewAliveCell()
-	if new_cell.status != Alive {
-		t.Errorf("expected alive cell, but got dead")
-	}
+	assert.Equal(t, Alive, new_cell.status)
 }
 
 func TestValidNewDeadCellGeneration(t *testing.T) {
 	new_cell := NewDeadCell()
-	if new_cell.status != Dead {
-		t.Errorf("expected dead cell, but got alive")
-	}
+	assert.Equal(t, Dead, new_cell.status)
 }
 
 func TestIsAliveCheckForNewCell(t *testing.T) {
@@ -33,8 +31,5 @@ func TestValidNumberOfLiveNeighbors(t *testing.T) {
 		NewDeadCell(),
 		NewAliveCell(),
 	}
-
-	if mainCell.NumberOfLiveNeighbors() != 2 {
-		t.Errorf("Expected 2 live neighbors but got %d", mainCell.NumberOfLiveNeighbors())
-	}
+	assert.Equal(t, 2, mainCell.NumberOfLiveNeighbors())
 }
