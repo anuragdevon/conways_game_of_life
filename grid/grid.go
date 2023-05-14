@@ -41,3 +41,21 @@ func (grid *Grid) Randomize() {
 		}
 	}
 }
+
+func (grid *Grid) SetCellNeighbors() {
+	for row := 0; row < grid.rows; row++ {
+		for col := 0; col < grid.cols; col++ {
+			currentCell := grid.Cells[row][col]
+			for neighborRow := row - 1; neighborRow <= row+1; neighborRow++ {
+				for neighborCol := col - 1; neighborCol <= col+1; neighborCol++ {
+					if neighborRow == row && neighborCol == col {
+						continue
+					}
+					if neighborRow >= 0 && neighborRow < grid.rows && neighborCol >= 0 && neighborCol < grid.cols {
+						currentCell.Neighbors = append(currentCell.Neighbors, grid.Cells[neighborRow][neighborCol])
+					}
+				}
+			}
+		}
+	}
+}
