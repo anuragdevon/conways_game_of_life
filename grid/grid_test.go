@@ -7,39 +7,39 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestValidNewGridCreationWithPositiveDimension(t *testing.T) {
+func TestNewGridFormWithPositiveDimension(t *testing.T) {
 	rows := 10
 	cols := 10
-	test_grid, err := NewGrid(rows, cols)
+	testGrid, err := NewGrid(rows, cols)
 	assert.Nil(t, err)
-	assert.Equal(t, rows, test_grid.rows)
-	assert.Equal(t, cols, test_grid.cols)
+	assert.Equal(t, rows, testGrid.rows)
+	assert.Equal(t, cols, testGrid.cols)
 }
 
-func TestInvalidGridCreationWithZeroDimension(t *testing.T) {
+func TestNewGridNotFormWithZeroDimension(t *testing.T) {
 	rows := 0
 	cols := 0
 	_, err := NewGrid(rows, cols)
 	assert.NotNil(t, err)
 }
 
-func TestInvalidGridCreationWithNegativeDimension(t *testing.T) {
+func TestNewGridNotFormWithNegativeDimension(t *testing.T) {
 	rows := -1
 	cols := 0
 	_, err := NewGrid(rows, cols)
 	assert.NotNil(t, err)
 }
 
-func TestValidRandomCellValuesInitialization(t *testing.T) {
+func TestRandomizeAllocatesRandomCellValues(t *testing.T) {
 	rows := 10
 	cols := 10
-	test_grid, _ := NewGrid(rows, cols)
+	testGrid, _ := NewGrid(rows, cols)
 
 	count_number_of_ones, count_number_of_zeros := 0, 0
-	test_grid.Randomize()
+	testGrid.Randomize()
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
-			if test_grid.Cells[i][j].IsAlive() {
+			if testGrid.Cells[i][j].IsAlive() {
 				count_number_of_ones += 1
 			} else {
 				count_number_of_zeros += 1
@@ -50,7 +50,7 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	assert.NotEqual(t, 0, count_number_of_zeros)
 }
 
-func TestValidSetCellNeighbors(t *testing.T) {
+func TestAddCellNeighborsAllocatesNeighborsToCell(t *testing.T) {
 	rows := 2
 	cols := 2
 	testGrid, _ := NewGrid(rows, cols)
@@ -59,7 +59,7 @@ func TestValidSetCellNeighbors(t *testing.T) {
 	testGrid.Cells[1][0] = cell.NewAliveCell()
 	testGrid.Cells[1][1] = cell.NewAliveCell()
 
-	testGrid.SetCellNeighbors()
+	testGrid.AddCellNeighbors()
 	assert.Equal(t, 2, testGrid.Cells[0][0].NumberOfLiveNeighbors())
 	assert.Equal(t, 3, testGrid.Cells[0][1].NumberOfLiveNeighbors())
 	assert.Equal(t, 2, testGrid.Cells[1][0].NumberOfLiveNeighbors())

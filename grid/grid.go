@@ -42,7 +42,7 @@ func (grid *Grid) Randomize() {
 	}
 }
 
-func (grid *Grid) SetCellNeighbors() {
+func (grid *Grid) AddCellNeighbors() {
 	for row := 0; row < grid.rows; row++ {
 		for col := 0; col < grid.cols; col++ {
 			currentCell := grid.Cells[row][col]

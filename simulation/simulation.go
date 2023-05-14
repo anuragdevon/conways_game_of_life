@@ -12,7 +12,7 @@ type Simulation struct {
 }
 
 func NewSimulation(matrix *grid.Grid) *Simulation {
-	matrix.SetCellNeighbors()
+	matrix.AddCellNeighbors()
 	return &Simulation{
 		grid: matrix,
 	}
@@ -33,7 +33,7 @@ func (s *Simulation) nextStateOfSimulation() {
 			nextSimGrid.Cells[i][j] = nextCell
 		}
 	}
-	nextSimGrid.SetCellNeighbors()
+	nextSimGrid.AddCellNeighbors()
 	s.grid = nextSimGrid
 }
 

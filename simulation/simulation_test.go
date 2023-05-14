@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestCreateValidNewSimulation(t *testing.T) {
+func TestNewSimulationCreatesValidSimulation(t *testing.T) {
 	rows := 10
 	cols := 10
 	testGrid, _ := grid.NewGrid(rows, cols)
@@ -18,34 +18,7 @@ func TestCreateValidNewSimulation(t *testing.T) {
 	}
 }
 
-func TestCreateValidNextStateOfSimulation(t *testing.T) {
-	rows := 3
-	cols := 3
-	testGrid, _ := grid.NewGrid(rows, cols)
-
-	testGrid.Cells = [][]*cell.Cell{
-		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewDeadCell()},
-		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewAliveCell()},
-		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewAliveCell()},
-	}
-
-	testSimulation := NewSimulation(testGrid)
-	testSimulation.nextStateOfSimulation()
-
-	expectedGridState, _ := grid.NewGrid(rows, cols)
-	expectedGridState.Cells = [][]*cell.Cell{
-		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
-		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
-		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewAliveCell()},
-	}
-	expectedSimulationState := NewSimulation(expectedGridState)
-
-	if !reflect.DeepEqual(expectedGridState, testSimulation.grid) {
-		t.Errorf("Expected next state:\n%v\nbut got:\n%v", expectedSimulationState.grid, testSimulation.grid)
-	}
-}
-
-func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
+func TestNextStateOfSimulationForLiveCellToDieForLessThanTwoNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
 	testGrid, _ := grid.NewGrid(rows, cols)
@@ -72,7 +45,7 @@ func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
 	}
 }
 
-func TestLiveCellToLiveForExactlyTwoOrThreeNeighbors(t *testing.T) {
+func TestNextStateOfSimulationForLiveCellToLiveForTwoOrThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
 	testGrid, _ := grid.NewGrid(rows, cols)
@@ -100,7 +73,7 @@ func TestLiveCellToLiveForExactlyTwoOrThreeNeighbors(t *testing.T) {
 	}
 }
 
-func TestLiveCellToDieOfOverpopulation(t *testing.T) {
+func TestNextStateOfSimulationForLiveCellToDieForMoreThanThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
 	testGrid, _ := grid.NewGrid(rows, cols)
@@ -127,7 +100,7 @@ func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 	}
 }
 
-func TestDeadToComeAliveForExactlyThreeNeighbors(t *testing.T) {
+func TestNextStateOfSimulationForDeadToComeAliveForExactlyThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
 	testGrid, _ := grid.NewGrid(rows, cols)

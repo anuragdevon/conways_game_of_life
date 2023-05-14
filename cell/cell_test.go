@@ -6,30 +6,37 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestValidNewAliveCellGeneration(t *testing.T) {
-	new_cell := NewAliveCell()
-	assert.Equal(t, Alive, new_cell.status)
+func TestNewAliveCellCreation(t *testing.T) {
+	newCell := NewAliveCell()
+	assert.Equal(t, Alive, newCell.status)
 }
 
-func TestValidNewDeadCellGeneration(t *testing.T) {
-	new_cell := NewDeadCell()
-	assert.Equal(t, Dead, new_cell.status)
+func TestNewDeadCellCreation(t *testing.T) {
+	newCell := NewDeadCell()
+	assert.Equal(t, Dead, newCell.status)
 }
 
-func TestIsAliveCheckForNewCell(t *testing.T) {
-	new_cell := NewAliveCell()
-	if !new_cell.IsAlive() {
+func TestIsAliveForNewAliveCell(t *testing.T) {
+	newCell := NewAliveCell()
+	if !newCell.IsAlive() {
 		t.Errorf("expected alive cell, but got dead")
 	}
 }
 
-func TestValidNumberOfLiveNeighbors(t *testing.T) {
-	mainCell := NewAliveCell()
+func TestIsAliveForNewDeadCell(t *testing.T) {
+	newCell := NewDeadCell()
+	if newCell.IsAlive() {
+		t.Errorf("expected dead cell, but got alive")
+	}
+}
 
-	mainCell.Neighbors = []*Cell{
+func TestNumberOfLiveNeighborsReturnCountOfLiveNeighbors(t *testing.T) {
+	targetCell := NewAliveCell()
+
+	targetCell.Neighbors = []*Cell{
 		NewAliveCell(),
 		NewDeadCell(),
 		NewAliveCell(),
 	}
-	assert.Equal(t, 2, mainCell.NumberOfLiveNeighbors())
+	assert.Equal(t, 2, targetCell.NumberOfLiveNeighbors())
 }
