@@ -48,5 +48,16 @@ func TestUpdateCellStatusOfAliveCellWithLessThanTwoLiveNeighbors(t *testing.T) {
 	}
 	aliveCellWithFewerThanTwoLiveNeighbors.UpdateCellStatus()
 	assert.Equal(t, aliveCellWithFewerThanTwoLiveNeighbors.IsAlive(), false)
+}
 
+func TestUpdateCellStatusOfAliveCellWithMoreThanThreeLiveNeighbors(t *testing.T) {
+	aliveCellWithMoreThanThreeLiveNeighbors := NewAliveCell()
+	aliveCellWithMoreThanThreeLiveNeighbors.neighbors = []*Cell{
+		NewAliveCell(),
+		NewAliveCell(),
+		NewAliveCell(),
+		NewAliveCell(),
+	}
+	aliveCellWithMoreThanThreeLiveNeighbors.UpdateCellStatus()
+	assert.Equal(t, aliveCellWithMoreThanThreeLiveNeighbors.IsAlive(), false)
 }
