@@ -31,12 +31,12 @@ func NewGrid(rows, cols int) (*Grid, error) {
 }
 
 func (grid *Grid) Randomize() {
-	for i := 0; i < grid.rows; i++ {
-		for j := 0; j < grid.cols; j++ {
+	for currentRow := 0; currentRow < grid.rows; currentRow++ {
+		for currentCol := 0; currentCol < grid.cols; currentCol++ {
 			if rand.Intn(2) == 0 {
-				grid.Cells[i][j] = cell.NewDeadCell()
+				grid.Cells[currentRow][currentCol] = cell.NewDeadCell()
 			} else {
-				grid.Cells[i][j] = cell.NewAliveCell()
+				grid.Cells[currentRow][currentCol] = cell.NewAliveCell()
 			}
 		}
 	}

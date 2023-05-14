@@ -21,16 +21,16 @@ func NewSimulation(matrix *grid.Grid) *Simulation {
 
 func (s *Simulation) nextStateOfSimulation() {
 	nextSimGrid, _ := grid.NewGrid(len(s.grid.Cells), len(s.grid.Cells[0]))
-	for i := range s.grid.Cells {
-		for j := range s.grid.Cells[i] {
+	for currentRow := range s.grid.Cells {
+		for currentCol := range s.grid.Cells[currentRow] {
 			nextCell := cell.NewDeadCell()
-			liveNeighbors := s.grid.Cells[i][j].NumberOfLiveNeighbors()
-			if s.grid.Cells[i][j].IsAlive() && (liveNeighbors == 2 || liveNeighbors == 3) {
+			liveNeighbors := s.grid.Cells[currentRow][currentCol].NumberOfLiveNeighbors()
+			if s.grid.Cells[currentRow][currentCol].IsAlive() && (liveNeighbors == 2 || liveNeighbors == 3) {
 				nextCell = cell.NewAliveCell()
-			} else if !s.grid.Cells[i][j].IsAlive() && liveNeighbors == 3 {
+			} else if !s.grid.Cells[currentRow][currentCol].IsAlive() && liveNeighbors == 3 {
 				nextCell = cell.NewAliveCell()
 			}
-			nextSimGrid.Cells[i][j] = nextCell
+			nextSimGrid.Cells[currentRow][currentCol] = nextCell
 		}
 	}
 	nextSimGrid.AddCellNeighbors()
@@ -38,9 +38,9 @@ func (s *Simulation) nextStateOfSimulation() {
 }
 
 func (s *Simulation) displaySimulationGrid() {
-	for i := range s.grid.Cells {
-		for j := range s.grid.Cells[i] {
-			if s.grid.Cells[i][j].IsAlive() {
+	for currentRow := range s.grid.Cells {
+		for currentCol := range s.grid.Cells[currentRow] {
+			if s.grid.Cells[currentRow][currentCol].IsAlive() {
 				fmt.Print("*")
 			} else {
 				fmt.Print("-")
