@@ -46,5 +46,9 @@ func (c *Cell) UpdateCellStatus() {
 		if numLiveNeighbors < 2 || numLiveNeighbors > 3 {
 			c.status = Dead
 		}
+	} else {
+		if numLiveNeighbors == 3 {
+			c.status = Alive
+		}
 	}
 }
