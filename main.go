@@ -23,6 +23,7 @@ func main() {
 	new_simulation := simulation.NewSimulation(matrix)
 
 	for i := 0; ; i++ {
+		fmt.Print("\033[H\033[2J")
 		fmt.Printf("Life Cycle %d\n", i+1)
 		new_simulation.UpdateGameOfLife()
 	}
