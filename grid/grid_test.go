@@ -1,7 +1,6 @@
 package grid
 
 import (
-	"conwaysgameoflife/cell"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -49,30 +48,5 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	}
 	if count_number_of_ones == 0 || count_number_of_zeros == 0 {
 		t.Errorf("Expected a random allocation of dead and live cells")
-	}
-}
-
-func TestValidNumberOfLiveNeighbors(t *testing.T) {
-	rows := 3
-	cols := 3
-	test_grid, _ := NewGrid(rows, cols)
-
-	test_grid.Cells[0][0] = cell.NewAliveCell()
-	test_grid.Cells[0][1] = cell.NewAliveCell()
-	test_grid.Cells[0][2] = cell.NewAliveCell()
-
-	test_grid.Cells[1][0] = cell.NewDeadCell()
-	test_grid.Cells[1][1] = cell.NewAliveCell()
-	test_grid.Cells[1][2] = cell.NewDeadCell()
-
-	test_grid.Cells[2][0] = cell.NewAliveCell()
-	test_grid.Cells[2][1] = cell.NewAliveCell()
-	test_grid.Cells[2][2] = cell.NewAliveCell()
-
-	expected_live_neighbors_for_cell_1_1 := 6
-	actual_live_neighbors_for_cell_1_1 := test_grid.NumberOfLiveNeighbors(1, 1)
-
-	if actual_live_neighbors_for_cell_1_1 != expected_live_neighbors_for_cell_1_1 {
-		t.Errorf("Expected %d neighbors but got %d", expected_live_neighbors_for_cell_1_1, actual_live_neighbors_for_cell_1_1)
 	}
 }

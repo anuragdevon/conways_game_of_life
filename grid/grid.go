@@ -41,17 +41,3 @@ func (grid *Grid) Randomize() {
 		}
 	}
 }
-
-func (grid *Grid) NumberOfLiveNeighbors(row, col int) int {
-	countLiveNeighbors := 0
-	for i := row - 1; i <= row+1; i++ {
-		for j := col - 1; j <= col+1; j++ {
-			if i >= 0 && i < grid.rows && j >= 0 && j < grid.cols && !(i == row && j == col) {
-				if grid.Cells[i][j].IsAlive() {
-					countLiveNeighbors += 1
-				}
-			}
-		}
-	}
-	return countLiveNeighbors
-}
