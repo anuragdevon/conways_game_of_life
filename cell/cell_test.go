@@ -2,8 +2,6 @@ package cell
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestValidNewAliveCellGeneration(t *testing.T) {
@@ -30,56 +28,13 @@ func TestIsAliveCheckForNewCell(t *testing.T) {
 func TestValidNumberOfLiveNeighbors(t *testing.T) {
 	mainCell := NewAliveCell()
 
-	mainCell.neighbors = append(mainCell.neighbors, NewAliveCell())
-	mainCell.neighbors = append(mainCell.neighbors, NewDeadCell())
-	mainCell.neighbors = append(mainCell.neighbors, NewAliveCell())
-
-	if mainCell.numberOfLiveNeighbors() != 2 {
-		t.Errorf("Expected 2 live neighbors but got %d", mainCell.numberOfLiveNeighbors())
-	}
-}
-
-func TestUpdateCellStatusOfAliveCellWithLessThanTwoLiveNeighbors(t *testing.T) {
-	aliveCellWithFewerThanTwoLiveNeighbors := NewAliveCell()
-	aliveCellWithFewerThanTwoLiveNeighbors.neighbors = []*Cell{
-		NewDeadCell(),
-		NewDeadCell(),
-		NewDeadCell(),
-	}
-	aliveCellWithFewerThanTwoLiveNeighbors.UpdateCellStatus()
-	assert.Equal(t, aliveCellWithFewerThanTwoLiveNeighbors.IsAlive(), false)
-}
-
-func TestUpdateCellStatusOfAliveCellWithMoreThanThreeLiveNeighbors(t *testing.T) {
-	aliveCellWithMoreThanThreeLiveNeighbors := NewAliveCell()
-	aliveCellWithMoreThanThreeLiveNeighbors.neighbors = []*Cell{
+	mainCell.neighbors = []*Cell{
 		NewAliveCell(),
-		NewAliveCell(),
-		NewAliveCell(),
-		NewAliveCell(),
-	}
-	aliveCellWithMoreThanThreeLiveNeighbors.UpdateCellStatus()
-	assert.Equal(t, aliveCellWithMoreThanThreeLiveNeighbors.IsAlive(), false)
-}
-
-func TestUpdateCellStatusOfDeadCellWithExactlyThreeLiveNeighbors(t *testing.T) {
-	deadCellWithExactlyThreeLiveNeighbors := NewDeadCell()
-	deadCellWithExactlyThreeLiveNeighbors.neighbors = []*Cell{
-		NewAliveCell(),
-		NewAliveCell(),
-		NewAliveCell(),
-	}
-	deadCellWithExactlyThreeLiveNeighbors.UpdateCellStatus()
-	assert.Equal(t, deadCellWithExactlyThreeLiveNeighbors.IsAlive(), true)
-}
-
-func TestUpdateCellStatusOfAliveCellWithTwoOrThreeLiveNeighbors(t *testing.T) {
-	aliveCellWithTwoOrThreeLiveNeighbors := NewAliveCell()
-	aliveCellWithTwoOrThreeLiveNeighbors.neighbors = []*Cell{
 		NewDeadCell(),
 		NewAliveCell(),
-		NewAliveCell(),
 	}
-	aliveCellWithTwoOrThreeLiveNeighbors.UpdateCellStatus()
-	assert.Equal(t, aliveCellWithTwoOrThreeLiveNeighbors.IsAlive(), true)
+
+	if mainCell.NumberOfLiveNeighbors() != 2 {
+		t.Errorf("Expected 2 live neighbors but got %d", mainCell.NumberOfLiveNeighbors())
+	}
 }
