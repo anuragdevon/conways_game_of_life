@@ -9,20 +9,20 @@ const (
 
 type Cell struct {
 	status    AliveStatus
-	neighbors []*Cell
+	Neighbors []*Cell
 }
 
 func NewAliveCell() *Cell {
 	return &Cell{
 		status:    Alive,
-		neighbors: make([]*Cell, 0),
+		Neighbors: make([]*Cell, 0),
 	}
 }
 
 func NewDeadCell() *Cell {
 	return &Cell{
 		status:    Dead,
-		neighbors: make([]*Cell, 0),
+		Neighbors: make([]*Cell, 0),
 	}
 }
 
@@ -32,7 +32,7 @@ func (c *Cell) IsAlive() bool {
 
 func (c *Cell) NumberOfLiveNeighbors() int {
 	countLiveNeighbors := 0
-	for _, neighbor := range c.neighbors {
+	for _, neighbor := range c.Neighbors {
 		if neighbor.IsAlive() {
 			countLiveNeighbors++
 		}

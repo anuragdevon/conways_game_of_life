@@ -1,6 +1,7 @@
 package grid
 
 import (
+	"conwaysgameoflife/cell"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -49,4 +50,20 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 	if count_number_of_ones == 0 || count_number_of_zeros == 0 {
 		t.Errorf("Expected a random allocation of dead and live cells")
 	}
+}
+
+func TestValidSetCellNeighbors(t *testing.T) {
+	rows := 2
+	cols := 2
+	testGrid, _ := NewGrid(rows, cols)
+
+	testGrid.Cells[0][0] = cell.NewAliveCell()
+	testGrid.Cells[1][0] = cell.NewAliveCell()
+	testGrid.Cells[1][1] = cell.NewAliveCell()
+
+	testGrid.SetCellNeighbors()
+	assert.Equal(t, 2, testGrid.Cells[0][0].NumberOfLiveNeighbors())
+	assert.Equal(t, 3, testGrid.Cells[0][1].NumberOfLiveNeighbors())
+	assert.Equal(t, 2, testGrid.Cells[1][0].NumberOfLiveNeighbors())
+	assert.Equal(t, 2, testGrid.Cells[1][1].NumberOfLiveNeighbors())
 }

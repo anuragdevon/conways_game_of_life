@@ -19,6 +19,7 @@ func main() {
 	}
 
 	matrix.Randomize()
+	matrix.SetCellNeighbors()
 
 	new_simulation := simulation.NewSimulation(matrix)
 
