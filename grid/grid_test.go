@@ -12,9 +12,8 @@ func TestValidNewGridCreationWithPositiveDimension(t *testing.T) {
 	cols := 10
 	test_grid, err := NewGrid(rows, cols)
 	assert.Nil(t, err)
-	if test_grid.rows != rows || test_grid.cols != cols {
-		t.Errorf("expected a grid of %d rows and %d cols", rows, cols)
-	}
+	assert.Equal(t, rows, test_grid.rows)
+	assert.Equal(t, cols, test_grid.cols)
 }
 
 func TestInvalidGridCreationWithZeroDimension(t *testing.T) {
@@ -47,9 +46,8 @@ func TestValidRandomCellValuesInitialization(t *testing.T) {
 			}
 		}
 	}
-	if count_number_of_ones == 0 || count_number_of_zeros == 0 {
-		t.Errorf("Expected a random allocation of dead and live cells")
-	}
+	assert.NotEqual(t, 0, count_number_of_ones)
+	assert.NotEqual(t, 0, count_number_of_zeros)
 }
 
 func TestValidSetCellNeighbors(t *testing.T) {
