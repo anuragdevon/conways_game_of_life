@@ -8,15 +8,26 @@ const (
 )
 
 type Cell struct {
-	status AliveStatus
+	status    AliveStatus
+	neighbors []*Cell
 }
 
 func NewAliveCell() *Cell {
-	return &Cell{status: Alive}
+	return &Cell{
+		status:    Alive,
+		neighbors: make([]*Cell, 0),
+	}
+}
+
+func (c *Cell) AddNeighbor(neighbor *Cell) {
+	c.neighbors = append(c.neighbors, neighbor)
 }
 
 func NewDeadCell() *Cell {
-	return &Cell{status: Dead}
+	return &Cell{
+		status:    Dead,
+		neighbors: make([]*Cell, 0),
+	}
 }
 
 func (c *Cell) IsAlive() bool {
