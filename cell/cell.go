@@ -39,3 +39,12 @@ func (c *Cell) numberOfLiveNeighbors() int {
 	}
 	return countLiveNeighbors
 }
+
+func (c *Cell) UpdateCellStatus() {
+	numLiveNeighbors := c.numberOfLiveNeighbors()
+	if c.IsAlive() {
+		if numLiveNeighbors < 2 {
+			c.status = Dead
+		}
+	}
+}
