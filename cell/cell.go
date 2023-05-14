@@ -19,10 +19,6 @@ func NewAliveCell() *Cell {
 	}
 }
 
-func (c *Cell) AddNeighbor(neighbor *Cell) {
-	c.neighbors = append(c.neighbors, neighbor)
-}
-
 func NewDeadCell() *Cell {
 	return &Cell{
 		status:    Dead,

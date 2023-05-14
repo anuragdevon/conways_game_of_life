@@ -24,14 +24,3 @@ func TestIsAliveCheckForNewCell(t *testing.T) {
 		t.Errorf("expected alive cell, but got dead")
 	}
 }
-
-func TestValidAdditionOfNeighbors(t *testing.T) {
-	mainCell := NewAliveCell()
-	neighborCell := NewDeadCell()
-
-	mainCell.AddNeighbor(neighborCell)
-
-	if len(mainCell.neighbors) != 1 || mainCell.neighbors[0] != neighborCell {
-		t.Errorf("got unexpected neighbors")
-	}
-}
