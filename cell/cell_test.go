@@ -72,3 +72,14 @@ func TestUpdateCellStatusOfDeadCellWithExactlyThreeLiveNeighbors(t *testing.T) {
 	deadCellWithExactlyThreeLiveNeighbors.UpdateCellStatus()
 	assert.Equal(t, deadCellWithExactlyThreeLiveNeighbors.IsAlive(), true)
 }
+
+func TestUpdateCellStatusOfAliveCellWithTwoOrThreeLiveNeighbors(t *testing.T) {
+	aliveCellWithTwoOrThreeLiveNeighbors := NewAliveCell()
+	aliveCellWithTwoOrThreeLiveNeighbors.neighbors = []*Cell{
+		NewDeadCell(),
+		NewAliveCell(),
+		NewAliveCell(),
+	}
+	aliveCellWithTwoOrThreeLiveNeighbors.UpdateCellStatus()
+	assert.Equal(t, aliveCellWithTwoOrThreeLiveNeighbors.IsAlive(), true)
+}
