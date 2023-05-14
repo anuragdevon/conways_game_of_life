@@ -24,3 +24,15 @@ func TestIsAliveCheckForNewCell(t *testing.T) {
 		t.Errorf("expected alive cell, but got dead")
 	}
 }
+
+func TestValidNumberOfLiveNeighbors(t *testing.T) {
+	mainCell := NewAliveCell()
+
+	mainCell.neighbors = append(mainCell.neighbors, NewAliveCell())
+	mainCell.neighbors = append(mainCell.neighbors, NewDeadCell())
+	mainCell.neighbors = append(mainCell.neighbors, NewAliveCell())
+
+	if mainCell.NumberOfLiveNeighbors() != 2 {
+		t.Errorf("Expected 2 live neighbors but got %d", mainCell.neighbors)
+	}
+}
