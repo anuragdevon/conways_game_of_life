@@ -43,7 +43,7 @@ func (c *Cell) numberOfLiveNeighbors() int {
 func (c *Cell) UpdateCellStatus() {
 	numLiveNeighbors := c.numberOfLiveNeighbors()
 	if c.IsAlive() {
-		if numLiveNeighbors < 2 {
+		if numLiveNeighbors < 2 || numLiveNeighbors > 3 {
 			c.status = Dead
 		}
 	}
