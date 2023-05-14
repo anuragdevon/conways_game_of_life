@@ -13,21 +13,21 @@ type Grid struct {
 }
 
 func NewGrid(rows, cols int) (*Grid, error) {
-	if rows <= 0 && cols <= 0 {
-		return &Grid{}, errors.New("invalid rows or cols values")
+	if rows <= 0 || cols <= 0 {
+		return nil, errors.New("invalid rows or cols values")
 	}
-	newLifeMatix := &Grid{
+	newGrid := &Grid{
 		rows:  rows,
 		cols:  cols,
 		Cells: make([][]*cell.Cell, rows),
 	}
-	for row := range newLifeMatix.Cells {
-		newLifeMatix.Cells[row] = make([]*cell.Cell, cols)
-		for col := range newLifeMatix.Cells[row] {
-			newLifeMatix.Cells[row][col] = cell.NewDeadCell()
+	for row := range newGrid.Cells {
+		newGrid.Cells[row] = make([]*cell.Cell, cols)
+		for col := range newGrid.Cells[row] {
+			newGrid.Cells[row][col] = cell.NewDeadCell()
 		}
 	}
-	return newLifeMatix, nil
+	return newGrid, nil
 }
 
 func (grid *Grid) Randomize() {

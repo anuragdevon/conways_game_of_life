@@ -30,7 +30,7 @@ func (c *Cell) IsAlive() bool {
 	return c.status == Alive
 }
 
-func (c *Cell) NumberOfLiveNeighbors() int {
+func (c *Cell) numberOfLiveNeighbors() int {
 	countLiveNeighbors := 0
 	for _, neighbor := range c.neighbors {
 		if neighbor.IsAlive() {
