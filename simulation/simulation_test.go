@@ -23,182 +23,133 @@ func TestCreateValidNextStateOfSimulation(t *testing.T) {
 	cols := 3
 	testGrid, _ := grid.NewGrid(rows, cols)
 
-	testGrid.Cells[0][0] = cell.NewDeadCell()
-	testGrid.Cells[0][1] = cell.NewAliveCell()
-	testGrid.Cells[0][2] = cell.NewDeadCell()
-
-	testGrid.Cells[1][0] = cell.NewDeadCell()
-	testGrid.Cells[1][1] = cell.NewDeadCell()
-	testGrid.Cells[1][2] = cell.NewAliveCell()
-
-	testGrid.Cells[2][0] = cell.NewAliveCell()
-	testGrid.Cells[2][1] = cell.NewAliveCell()
-	testGrid.Cells[2][2] = cell.NewAliveCell()
+	testGrid.Cells = [][]*cell.Cell{
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+	}
 
 	testSimulation := NewSimulation(testGrid)
-
-	expectedStateGrid, _ := grid.NewGrid(rows, cols)
-	expectedStateGrid.Cells[0][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][2] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[1][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][2] = cell.NewAliveCell()
-	expectedStateGrid.Cells[2][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][1] = cell.NewAliveCell()
-	expectedStateGrid.Cells[2][2] = cell.NewAliveCell()
-
 	testSimulation.nextStateOfSimulation()
 
-	if !reflect.DeepEqual(expectedStateGrid.Cells, testSimulation.grid.Cells) {
-		t.Errorf("Expected next state grid:\n%v\nbut got:\n%v", expectedStateGrid.Cells, testSimulation.grid.Cells)
+	expectedGridState, _ := grid.NewGrid(rows, cols)
+	expectedGridState.Cells = [][]*cell.Cell{
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+	}
+	expectedSimulationState := NewSimulation(expectedGridState)
+
+	if !reflect.DeepEqual(expectedGridState, testSimulation.grid) {
+		t.Errorf("Expected next state:\n%v\nbut got:\n%v", expectedSimulationState.grid, testSimulation.grid)
 	}
 }
 
 func TestLiveCellToDieOfUnderpopulation(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, _ := grid.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
-	test_grid.Cells[0][0] = cell.NewAliveCell()
-	test_grid.Cells[0][1] = cell.NewDeadCell()
-	test_grid.Cells[0][2] = cell.NewDeadCell()
+	testGrid.Cells = [][]*cell.Cell{
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+	}
 
-	test_grid.Cells[1][0] = cell.NewDeadCell()
-	test_grid.Cells[1][1] = cell.NewAliveCell()
-	test_grid.Cells[1][2] = cell.NewDeadCell()
+	expectedGridState, _ := grid.NewGrid(rows, cols)
+	expectedGridState.Cells = [][]*cell.Cell{
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+	}
+	expectedSimulationState := NewSimulation(expectedGridState)
 
-	test_grid.Cells[2][0] = cell.NewDeadCell()
-	test_grid.Cells[2][1] = cell.NewDeadCell()
-	test_grid.Cells[2][2] = cell.NewDeadCell()
-
-	expectedStateGrid, _ := grid.NewGrid(rows, cols)
-	expectedStateGrid.Cells[0][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][2] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][2] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][2] = cell.NewDeadCell()
-
-	testSimulation := NewSimulation(test_grid)
-
+	testSimulation := NewSimulation(testGrid)
 	testSimulation.nextStateOfSimulation()
 
-	if !reflect.DeepEqual(expectedStateGrid.Cells, testSimulation.grid.Cells) {
-		t.Errorf("Expected next state grid:\n%v\nbut got:\n%v", expectedStateGrid.Cells, testSimulation.grid.Cells)
+	if !reflect.DeepEqual(expectedSimulationState.grid, testSimulation.grid) {
+		t.Errorf("Expected next state grid:\n%v\nbut got:\n%v", expectedSimulationState.grid, testSimulation.grid)
 	}
 }
 
 func TestLiveCellToLiveForExactlyTwoOrThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, _ := grid.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
-	test_grid.Cells[0][0] = cell.NewDeadCell()
-	test_grid.Cells[0][1] = cell.NewAliveCell()
-	test_grid.Cells[0][2] = cell.NewDeadCell()
+	testGrid.Cells = [][]*cell.Cell{
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+	}
 
-	test_grid.Cells[1][0] = cell.NewDeadCell()
-	test_grid.Cells[1][1] = cell.NewDeadCell()
-	test_grid.Cells[1][2] = cell.NewAliveCell()
+	expectedGridState, _ := grid.NewGrid(rows, cols)
+	expectedGridState.Cells = [][]*cell.Cell{
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+	}
+	expectedSimulationState := NewSimulation(expectedGridState)
 
-	test_grid.Cells[2][0] = cell.NewAliveCell()
-	test_grid.Cells[2][1] = cell.NewAliveCell()
-	test_grid.Cells[2][2] = cell.NewAliveCell()
-
-	expectedStateGrid, _ := grid.NewGrid(rows, cols)
-	expectedStateGrid.Cells[0][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][2] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[1][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][2] = cell.NewAliveCell()
-	expectedStateGrid.Cells[2][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][1] = cell.NewAliveCell()
-	expectedStateGrid.Cells[2][2] = cell.NewAliveCell()
-
-	testSimulation := NewSimulation(test_grid)
+	testSimulation := NewSimulation(testGrid)
 
 	testSimulation.nextStateOfSimulation()
 
-	if !reflect.DeepEqual(expectedStateGrid.Cells, testSimulation.grid.Cells) {
-		t.Errorf("Expected next state grid:\n%v\nbut got:\n%v", expectedStateGrid.Cells, testSimulation.grid.Cells)
+	if !reflect.DeepEqual(expectedSimulationState.grid, testSimulation.grid) {
+		t.Errorf("Expected next state:\n%v\nbut got:\n%v", expectedSimulationState.grid, testSimulation.grid)
 	}
 }
 
 func TestLiveCellToDieOfOverpopulation(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, _ := grid.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
-	test_grid.Cells[0][0] = cell.NewAliveCell()
-	test_grid.Cells[0][1] = cell.NewAliveCell()
-	test_grid.Cells[0][2] = cell.NewDeadCell()
+	testGrid.Cells = [][]*cell.Cell{
+		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewDeadCell()},
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+	}
 
-	test_grid.Cells[1][0] = cell.NewDeadCell()
-	test_grid.Cells[1][1] = cell.NewAliveCell()
-	test_grid.Cells[1][2] = cell.NewAliveCell()
-
-	test_grid.Cells[2][0] = cell.NewAliveCell()
-	test_grid.Cells[2][1] = cell.NewAliveCell()
-	test_grid.Cells[2][2] = cell.NewAliveCell()
-
-	testSimulation := NewSimulation(test_grid)
-
-	expectedStateGrid, _ := grid.NewGrid(rows, cols)
-	expectedStateGrid.Cells[0][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[0][1] = cell.NewAliveCell()
-	expectedStateGrid.Cells[0][2] = cell.NewAliveCell()
-	expectedStateGrid.Cells[1][0] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][2] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[2][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][2] = cell.NewAliveCell()
-
+	testSimulation := NewSimulation(testGrid)
 	testSimulation.nextStateOfSimulation()
 
-	if !reflect.DeepEqual(expectedStateGrid.Cells, testSimulation.grid.Cells) {
-		t.Errorf("Expected next state grid:\n%v\nbut got:\n%v", expectedStateGrid.Cells, testSimulation.grid.Cells)
+	expectedGridState, _ := grid.NewGrid(rows, cols)
+	expectedGridState.Cells = [][]*cell.Cell{
+		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+		{cell.NewDeadCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+	}
+	expectedSimulationState := NewSimulation(expectedGridState)
+
+	if !reflect.DeepEqual(expectedGridState, testSimulation.grid) {
+		t.Errorf("Expected next state:\n%v\nbut got:\n%v", expectedSimulationState.grid, testSimulation.grid)
 	}
 }
 
 func TestDeadToComeAliveForExactlyThreeNeighbors(t *testing.T) {
 	rows := 3
 	cols := 3
-	test_grid, _ := grid.NewGrid(rows, cols)
+	testGrid, _ := grid.NewGrid(rows, cols)
 
-	test_grid.Cells[0][0] = cell.NewAliveCell()
-	test_grid.Cells[0][1] = cell.NewDeadCell()
-	test_grid.Cells[0][2] = cell.NewAliveCell()
+	testGrid.Cells = [][]*cell.Cell{
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+		{cell.NewAliveCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+		{cell.NewDeadCell(), cell.NewAliveCell(), cell.NewAliveCell()},
+	}
 
-	test_grid.Cells[1][0] = cell.NewAliveCell()
-	test_grid.Cells[1][1] = cell.NewAliveCell()
-	test_grid.Cells[1][2] = cell.NewAliveCell()
-
-	test_grid.Cells[2][0] = cell.NewDeadCell()
-	test_grid.Cells[2][1] = cell.NewAliveCell()
-	test_grid.Cells[2][2] = cell.NewAliveCell()
-
-	testSimulation := NewSimulation(test_grid)
-
-	expectedStateGrid, _ := grid.NewGrid(rows, cols)
-	expectedStateGrid.Cells[0][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[0][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[0][2] = cell.NewAliveCell()
-	expectedStateGrid.Cells[1][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[1][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[1][2] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][0] = cell.NewAliveCell()
-	expectedStateGrid.Cells[2][1] = cell.NewDeadCell()
-	expectedStateGrid.Cells[2][2] = cell.NewAliveCell()
-
+	testSimulation := NewSimulation(testGrid)
 	testSimulation.nextStateOfSimulation()
 
-	if !reflect.DeepEqual(expectedStateGrid.Cells, testSimulation.grid.Cells) {
-		t.Errorf("Expected next state grid:\n%v\nbut got:\n%v", expectedStateGrid.Cells, testSimulation.grid.Cells)
+	expectedGridState, _ := grid.NewGrid(rows, cols)
+	expectedGridState.Cells = [][]*cell.Cell{
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewDeadCell()},
+		{cell.NewAliveCell(), cell.NewDeadCell(), cell.NewAliveCell()},
+	}
+	expectedSimulationState := NewSimulation(expectedGridState)
+
+	if !reflect.DeepEqual(expectedGridState, testSimulation.grid) {
+		t.Errorf("Expected next state:\n%v\nbut got:\n%v", expectedSimulationState.grid, testSimulation.grid)
 	}
 }
