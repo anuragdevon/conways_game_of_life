@@ -33,6 +33,6 @@ func TestValidNumberOfLiveNeighbors(t *testing.T) {
 	mainCell.neighbors = append(mainCell.neighbors, NewAliveCell())
 
 	if mainCell.NumberOfLiveNeighbors() != 2 {
-		t.Errorf("Expected 2 live neighbors but got %d", mainCell.neighbors)
+		t.Errorf("Expected 2 live neighbors but got %d", mainCell.NumberOfLiveNeighbors())
 	}
 }

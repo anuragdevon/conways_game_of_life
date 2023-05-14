@@ -29,3 +29,13 @@ func NewDeadCell() *Cell {
 func (c *Cell) IsAlive() bool {
 	return c.status == Alive
 }
+
+func (c *Cell) NumberOfLiveNeighbors() int {
+	countLiveNeighbors := 0
+	for _, neighbor := range c.neighbors {
+		if neighbor.IsAlive() {
+			countLiveNeighbors++
+		}
+	}
+	return countLiveNeighbors
+}
